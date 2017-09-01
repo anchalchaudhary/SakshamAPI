@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBSakshamModelStoreContainer" CdmEntityContainer="DBSakshamEntities">
+    <EntitySetMapping Name="tblStudents">
+      <EntityTypeMapping TypeName="DBSakshamModel.tblStudent">
+        <MappingFragment StoreEntitySet="tblStudents">
+          <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StudentNo" ColumnName="StudentNo" />
+          <ScalarProperty Name="Branch" ColumnName="Branch" />
+          <ScalarProperty Name="Year" ColumnName="Year" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+          <ScalarProperty Name="SportsInterested" ColumnName="SportsInterested" />
+          <ScalarProperty Name="Hosteler" ColumnName="Hosteler" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
