@@ -14,19 +14,24 @@ namespace SakshamEMSApi.Controllers
         [HttpPost]
         public IHttpActionResult Register(Student model)
         {
-            tblStudent objtblStudent = new tblStudent();
-            objtblStudent.Name = model.Name;
-            objtblStudent.StudentNo = model.StudentNo;
-            objtblStudent.Branch = model.Branch;
-            objtblStudent.Year = model.Year;
-            objtblStudent.ContactNumber = model.ContactNumber;
-            objtblStudent.SportsInterested = model.SportsInterested;
-            objtblStudent.Hosteler = model.Hosteler;
+            if (ModelState.IsValid)
+            {
+                tblStudent objtblStudent = new tblStudent();
+                objtblStudent.Name = model.Name;
+                objtblStudent.StudentNo = model.StudentNo;
+                objtblStudent.Branch = model.Branch;
+                objtblStudent.Year = model.Year;
+                objtblStudent.ContactNumber = model.ContactNumber;
+                objtblStudent.SportsInterested = model.SportsInterested;
+                objtblStudent.Hosteler = model.Hosteler;
 
-            db.tblStudents.Add(objtblStudent);
-            db.SaveChanges();
+                db.tblStudents.Add(objtblStudent);
+                db.SaveChanges();
 
-            return Ok();
+                int id = objtblStudent.StudentID;
+                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.OK, id.ToString()));
+            }
+            return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Some error occureed. Try again."));
         }
     }
 }

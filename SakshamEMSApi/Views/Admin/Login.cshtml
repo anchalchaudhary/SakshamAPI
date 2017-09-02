@@ -1,0 +1,33 @@
+﻿@model SakshamEMSApi.Models.LoginModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<style>
+    .error {
+        color: red;
+    }
+</style>
+<div class="row">
+    <div class="col m6 offset-m3">
+        @using (Html.BeginForm("Login", "Admin", FormMethod.Post, new { style = "padding: 0 5vw;" }))
+        {
+            <div class="input-field">
+                @Html.TextBoxFor(model => model.LoginID, new { @class = "form-control", @placeholder = "Your LoginID here..." })
+                @Html.ValidationMessageFor(model => model.LoginID, "", new { @class = "error" })
+            </div>
+
+            <div class="input-field">
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", @placeholder = "Your password here..." })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "error" })
+            </div>
+
+            <div class="error">@ViewBag.InvalidCredentials</div>
+            <div class="input-field">
+                <button class="waves-effect waves-light btn red center">LOGIN</button>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,63 @@
+﻿@model SakshamEMSApi.Models.Student
+<div>
+    <form id="EditStudentForm">
+        @Html.HiddenFor(m => m.StudentID)
+
+        @Html.LabelFor(model => model.Name, "Name")
+        @Html.TextBoxFor(model => model.Name, new { @id = "name", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "error" })
+
+        @Html.LabelFor(model => model.StudentNo, "Date")
+        @Html.TextBoxFor(model => model.StudentNo, new { @id = "date", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.StudentNo, "", new { @class = "error" })
+
+        @Html.LabelFor(model => model.Branch, "Branch")
+        @Html.TextBoxFor(model => model.Branch, new { @id = "branch", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Branch, "", new { @class = "error" })
+
+        @Html.LabelFor(model => model.Year, "Year")
+        @Html.TextBoxFor(model => model.Year, new { @id = "year", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Year, "", new { @class = "error" })
+
+        @Html.LabelFor(model => model.ContactNumber, "Contact Number")
+        @Html.TextBoxFor(model => model.ContactNumber, new { @id = "contact", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "error" })
+
+        @Html.LabelFor(model => model.SportsInterested, "Sports Interested")
+        @Html.TextBoxFor(model => model.SportsInterested, new { @id = "sports", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.SportsInterested, "", new { @class = "error" })
+
+        @Html.LabelFor(model => model.Hosteler, "Hosteler")
+        @Html.TextBoxFor(model => model.Hosteler, new { @id = "hosteler", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Hosteler, "", new { @class = "error" })
+
+        <div>
+            <a href="#" id="btnUpdateStudent" class="btn btn-success center">
+                @if (Model.StudentID > 0)
+                {
+                    <span>Update</span>
+                }
+            </a>
+        </div>
+    </form>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#btnUpdateStudent").click(function () {
+            var editedData = $("#EditStudentForm").serialize();
+
+            if (!$("#EditStudentForm").valid()) {
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                url: "/Admin/SaveStudentDetails",
+                data: editedData,
+                success: function () {
+                    $("#EditEventModal").modal('close');
+                    window.location.href = "/Admin/Index";
+                }
+            })
+        })
+    })
+</script>

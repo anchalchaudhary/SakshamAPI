@@ -1,0 +1,125 @@
+﻿@model SakshamEMSApi.Models.Student
+@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/modernizr-2.6.2.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+<div>
+    @*<button id="btnExport" class="btn btn-success" onclick="'@Url.Action("ExportToExcel", "Admin")'"><i class="glyphicon glyphicon-download"></i></button>*@
+    @Html.ActionLink("Download", "ExportToExcel", "Admin", new { @class = "btn btn-success", @id = "btnExport" })
+</div>
+
+<table class="table table-condensed">
+    <tr>
+        <th>Name</th>
+        <th>Student No.</th>
+        <th>Branch</th>
+        <th>Year</th>
+        <th>Contact</th>
+        <th>Sports</th>
+        <th>Hosteler</th>
+
+    </tr>
+    <tbody>
+        @if (ViewBag.StudentList != null)
+        {
+            foreach (var item in ViewBag.StudentList)
+            {
+                <tr id="row_@item.StudentID">
+                    <td>@item.Name</td>
+                    <td>@item.StudentNo</td>
+                    <td>@item.Branch</td>
+                    <td>@item.Year</td>
+                    <td>@item.ContactNumber</td>
+                    <td>@item.SportsInterested</td>
+                    <td>@item.Hosteler</td>
+                    <td><a href="#EditStudentModal" class="btn" onclick="EditStudent(@item.StudentID)"><i class="glyphicon glyphicon-edit"></i></a></td>
+                    <td><a href="#ConfirmDeleteStudentModal" class="btn danger" onclick="ConfirmDeleteStudent(@item.StudentID)"><i class="glyphicon glyphicon-trash"></i></a></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<input type="hidden" id="hiddenStudentID" />
+
+<!--Edit Student Modal-->
+<div  class="modal fade" id="EditStudentModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Student's Details</h4>
+            </div>
+            <div class="modal-body" id="EditStudentModalBody">
+
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Edit Student function-->
+<script>
+    var EditStudent = function (StudentID) {
+        var url = "/Admin/EditStudent?StudentID=" + StudentID;
+        $("#EditStudentModalBody").load(url, function () {
+            $("#EditStudentModal").modal('show');
+        })
+    }
+</script>
+
+<!--Confirm Delete Student Modal-->
+<div class="modal fade" id="ConfirmDeleteStudentModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Confirm Delete</h4>
+            </div>
+            <div class="modal-body" id="ConfirmDeleteStudentModalBody">
+                <h3>Are you sure?</h3>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" onclick=$("#ConfirmDeleteStudentModal").modal("close")>Cancel</a>
+                <a href="#" class="btn btn-success" onclick="DeleteStudent()">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!---Confirm Delete Student function-->
+<script>
+    var ConfirmDeleteStudent = function (StudentID) {
+        $("#hiddenStudentID").val(StudentID);
+        $("#ConfirmDeleteStudentModal").modal('show');
+    }
+
+    var DeleteStudent = function () {
+        var data = $("#hiddenStudentID").val();
+        $.ajax({
+            type: "POST",
+            url: "/Admin/DeleteStudent",
+            data: { StudentID: data },
+            success: function (result) {
+                $("#ConfirmDeleteStudentModal").modal('hide');
+                alert("Deleted");
+                $("#row_" + data).remove();
+            }
+        })
+    }
+</script>
+
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
