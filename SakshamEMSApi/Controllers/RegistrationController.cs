@@ -10,8 +10,9 @@ namespace SakshamEMSApi.Controllers
 {
     public class RegistrationController : ApiController
     {
-        DBSakshamEntities db = new DBSakshamEntities();
-        [HttpPost]
+
+        [System.Web.Http.AcceptVerbs("GET", "POST")]
+        [System.Web.Http.HttpGet]
         public IHttpActionResult Register(Student model)
         {
             if (ModelState.IsValid)
@@ -24,12 +25,14 @@ namespace SakshamEMSApi.Controllers
                 objtblStudent.ContactNumber = model.ContactNumber;
                 objtblStudent.SportsInterested = model.SportsInterested;
                 objtblStudent.Hosteler = model.Hosteler;
+                using (DBSakshamEntities db = new DBSakshamEntities())
+                {
+                    db.tblStudents.Add(objtblStudent);
+                    db.SaveChanges();
+                }
 
-                db.tblStudents.Add(objtblStudent);
-                db.SaveChanges();
-
-                int id = objtblStudent.StudentID;
-                return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.OK, id.ToString()));
+                string name = objtblStudent.Name;
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK,name));
             }
             return ResponseMessage(Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Some error occureed. Try again."));
         }
