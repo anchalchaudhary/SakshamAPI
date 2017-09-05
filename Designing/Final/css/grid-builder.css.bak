@@ -1,0 +1,145 @@
+.row {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    box-sizing: border-box
+}
+
+.align-start {
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start
+}
+
+.align-center {
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center
+}
+
+.align-top {
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start
+}
+
+.align-middle {
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center
+}
+
+section.grid {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover
+}
+
+.row {
+    position: relative;
+    z-index: 10;
+    margin: auto
+}
+
+.row.constrained {
+    max-width: 70em
+}
+
+.pt-xxxlarge {
+    padding-top: 64px
+}
+
+@media only screen and (min-width: 40em) {
+    .pt-xxxlarge {
+        padding-top: 96px
+    }
+}
+
+.pb-small {
+    padding-bottom: 16px
+}
+
+@media only screen and (min-width: 40em) {
+    
+    .pb-xxlarge {
+    padding-bottom: 48px
+}
+}
+
+@media only screen and (min-width: 40em) {
+
+.pb-xxxlarge {
+    padding-bottom: 64px
+}
+}
+
+@media only screen and (min-width: 40em) {
+    .pb-xxxlarge {
+        padding-bottom: 96px
+    }
+}
+
+.content-align-left {
+    text-align: left
+}
+
+.content-align-center {
+    text-align: center
+}
+
+.content-align-right {
+    text-align: right
+}
+
+
+
+.angle {
+    position: absolute;
+    -webkit-transform-origin: center;
+    -ms-transform-origin: center;
+    transform-origin: center;
+    width: 100%
+}
+
+.overlap {
+    z-index: 2;
+    overflow: visible
+}
+
+.angle {
+    transition: opacity 0.25s cubic-bezier(0, 0.5, 0, 1), -webkit-transform 3s cubic-bezier(0, 1.12, 0, 0.95);
+    transition: opacity 0.25s cubic-bezier(0, 0.5, 0, 1), transform 3s cubic-bezier(0, 1.12, 0, 0.95);
+    transition: opacity 0.25s cubic-bezier(0, 0.5, 0, 1), transform 3s cubic-bezier(0, 1.12, 0, 0.95), -webkit-transform 3s cubic-bezier(0, 1.12, 0, 0.95);
+    will-change: transform, opacity;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden
+}
+
+.angle.unload {
+    opacity: 0 !important;
+    -webkit-transform: none !important;
+    -ms-transform: none !important;
+    transform: none !important
+}
+
+@media screen and (-ms-high-contrast: active),
+screen and (-ms-high-contrast: none) {
+    .angle {
+        transition: none
+    }
+    .angle.unload {
+        opacity: inherit;
+        -webkit-transform: inherit;
+        -ms-transform: inherit;
+        transform: inherit
+    }
+}

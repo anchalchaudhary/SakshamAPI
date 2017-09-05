@@ -1,0 +1,77 @@
+
+body a:hover {
+	text-decoration: none;
+}
+
+.games {
+    background: #fff;
+    text-align: center;
+} 
+.games h3.games-title span {
+    border-left-color:#fff;
+}
+.games-title > h3 {
+	color: #303030;
+	font-size: 3vw;
+	text-transform: uppercase;
+	letter-spacing: 10px;
+	font-family: 'Oswald', sans-serif;
+}
+.games-grids p {
+	color: #303030;
+	font-weight: bold;
+	padding: 0.2em 0;
+}
+.games-grids:hover p {  
+	color: #FF5722;
+}
+
+
+/* Owl Carousel */
+.carousel-container {
+	padding: 2vw 5vw;
+	margin-top: 5vw;
+}
+.owl-carousel {
+	background-color: #ff5722;
+	border-radius: 15px;
+	padding: 2em;
+}
+.owl-carousel  p {
+	text-align: justify;
+	color: #fff;
+	letter-spacing: 1px;
+	font-family: 'Encode Sans Semi Condensed', sans-serif;
+}
+.owl-carousel h2 {
+	text-align: center;
+	font-size: 3vw;
+	letter-spacing: 4px;
+	text-transform: uppercase;
+	color: #fff;
+	font-family: 'Oswald', sans-serif;
+
+}
+
+
+/* Media Queries */
+@media all and (max-width: 768px) {
+	.owl-carousel h2 {
+		font-size: 4vw;
+	}
+	.games-title > h3 {
+		font-size: 4vw;
+	}
+}
+@media all and (max-width: 640px) {
+	.games {
+		margin-top: 5vw;
+	}
+	.carousel-container {
+		margin-top: 1vw;
+		padding: 1em 2em;
+	}
+	.games-title > h3 {
+		font-size: 5vw;
+	}
+}
