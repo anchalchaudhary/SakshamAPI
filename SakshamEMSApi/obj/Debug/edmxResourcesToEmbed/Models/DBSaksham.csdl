@@ -12,6 +12,7 @@
     <Property Name="ContactNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="SportsInterested" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Hosteler" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityContainer Name="DBSakshamEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="tblStudents" EntityType="Self.tblStudent" />

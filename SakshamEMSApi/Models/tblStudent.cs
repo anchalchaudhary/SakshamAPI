@@ -22,5 +22,6 @@ namespace SakshamEMSApi.Models
         public string ContactNumber { get; set; }
         public string SportsInterested { get; set; }
         public string Hosteler { get; set; }
+        public string Gender { get; set; }
     }
 }

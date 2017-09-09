@@ -4,6 +4,7 @@
     <EntitySetMapping Name="tblStudents">
       <EntityTypeMapping TypeName="DBSakshamModel.tblStudent">
         <MappingFragment StoreEntitySet="tblStudents">
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
           <ScalarProperty Name="StudentID" ColumnName="StudentID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="StudentNo" ColumnName="StudentNo" />

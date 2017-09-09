@@ -50,7 +50,8 @@ namespace SakshamEMSApi.Controllers
                 Year = x.Year,
                 ContactNumber = x.ContactNumber,
                 SportsInterested = x.SportsInterested,
-                Hosteler = x.Hosteler
+                Hosteler = x.Hosteler,
+                Gender = x.Gender
             }).ToList();
 
             ViewBag.StudentList = studentsList;
@@ -76,6 +77,7 @@ namespace SakshamEMSApi.Controllers
                 model.ContactNumber = objtblStudent.ContactNumber;
                 model.SportsInterested = objtblStudent.SportsInterested;
                 model.Hosteler = objtblStudent.Hosteler;
+                model.Gender = objtblStudent.Gender;
             }
             return PartialView("EditStudentPartial", model);
         }
@@ -98,6 +100,7 @@ namespace SakshamEMSApi.Controllers
                     objtblStudent.ContactNumber = model.ContactNumber;
                     objtblStudent.SportsInterested = model.SportsInterested;
                     objtblStudent.Hosteler = model.Hosteler;
+                    objtblStudent.Gender = model.Gender;
 
                     db.SaveChanges();
 
@@ -140,7 +143,8 @@ namespace SakshamEMSApi.Controllers
                 Year = x.Year,
                 ContactNumber = x.ContactNumber,
                 SportsInterested = x.SportsInterested,
-                Hosteler = x.Hosteler
+                Hosteler = x.Hosteler,
+                Gender = x.Gender
             }).ToList();
 
             var gridview = new GridView();
@@ -160,5 +164,11 @@ namespace SakshamEMSApi.Controllers
             return View("Index");
         }
         #endregion
+        public ActionResult Logout()
+        {
+            Session["LoggedIn"] = null;
+            return RedirectToAction("Login","Admin");
+
+        }
     }
 }

@@ -25,5 +25,6 @@ namespace SakshamEMSApi.Models
         public string SportsInterested { get; set; }
         [Required(ErrorMessage = "Choose one")]
         public string Hosteler { get; set; }
+        public string Gender { get; set; }
     }
 }

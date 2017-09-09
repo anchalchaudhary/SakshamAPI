@@ -3,15 +3,19 @@
     ViewBag.Title = "Index";
 }
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
-<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 <script src="~/Scripts/modernizr-2.6.2.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+@Html.Raw(TempData["updated"])
 
 <div>
     @*<button id="btnExport" class="btn btn-success" onclick="'@Url.Action("ExportToExcel", "Admin")'"><i class="glyphicon glyphicon-download"></i></button>*@
     @Html.ActionLink("Download", "ExportToExcel", "Admin", new { @class = "btn btn-success", @id = "btnExport" })
+    @if (Session["LoggedIn"] != null)
+    {
+        <a href="@Url.Action("Logout","Admin")" class="blue-text">Logout</a>
+    }
 </div>
 
 <table class="table table-condensed">
@@ -23,7 +27,7 @@
         <th>Contact</th>
         <th>Sports</th>
         <th>Hosteler</th>
-
+        <th>Gender</th>
     </tr>
     <tbody>
         @if (ViewBag.StudentList != null)
@@ -38,6 +42,7 @@
                     <td>@item.ContactNumber</td>
                     <td>@item.SportsInterested</td>
                     <td>@item.Hosteler</td>
+                    <td>@item.Gender</td>
                     <td><a href="#EditStudentModal" class="btn" onclick="EditStudent(@item.StudentID)"><i class="glyphicon glyphicon-edit"></i></a></td>
                     <td><a href="#ConfirmDeleteStudentModal" class="btn danger" onclick="ConfirmDeleteStudent(@item.StudentID)"><i class="glyphicon glyphicon-trash"></i></a></td>
                 </tr>
@@ -49,7 +54,7 @@
 <input type="hidden" id="hiddenStudentID" />
 
 <!--Edit Student Modal-->
-<div  class="modal fade" id="EditStudentModal">
+<div class="modal fade" id="EditStudentModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -68,8 +73,7 @@
 <!--Edit Student function-->
 <script>
     var EditStudent = function (StudentID) {
-        var url = "/Admin/EditStudent?StudentID=" + StudentID;
-        $("#EditStudentModalBody").load(url, function () {
+        $("#EditStudentModalBody").load("@Url.Action("EditStudent", "Admin")?StudentID=" + StudentID, function () {
             $("#EditStudentModal").modal('show');
         })
     }
@@ -105,8 +109,8 @@
         var data = $("#hiddenStudentID").val();
         $.ajax({
             type: "POST",
-            url: "/Admin/DeleteStudent",
-            data: { StudentID: data },
+            url: '@Url.Action("DeleteStudent", "Admin")?StudentID=' + data,
+            //data: { StudentID: data },
             success: function (result) {
                 $("#ConfirmDeleteStudentModal").modal('hide');
                 alert("Deleted");

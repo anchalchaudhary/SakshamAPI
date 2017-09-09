@@ -1,14 +1,14 @@
 ﻿@model SakshamEMSApi.Models.Student
 <div>
     <form id="EditStudentForm">
-        @Html.HiddenFor(m => m.StudentID)
+        @Html.HiddenFor(m => m.StudentID, new { @id = "studentid" })
 
         @Html.LabelFor(model => model.Name, "Name")
         @Html.TextBoxFor(model => model.Name, new { @id = "name", @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Name, "", new { @class = "error" })
 
-        @Html.LabelFor(model => model.StudentNo, "Date")
-        @Html.TextBoxFor(model => model.StudentNo, new { @id = "date", @class = "form-control" })
+        @Html.LabelFor(model => model.StudentNo, "Student Number")
+        @Html.TextBoxFor(model => model.StudentNo, new { @id = "stdnumber", @class = "form-control" })
         @Html.ValidationMessageFor(model => model.StudentNo, "", new { @class = "error" })
 
         @Html.LabelFor(model => model.Branch, "Branch")
@@ -31,6 +31,10 @@
         @Html.TextBoxFor(model => model.Hosteler, new { @id = "hosteler", @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Hosteler, "", new { @class = "error" })
 
+        @Html.LabelFor(model => model.Gender, "Gender")
+        @Html.TextBoxFor(model => model.Gender, new { @id = "gender", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "error" })
+
         <div>
             <a href="#" id="btnUpdateStudent" class="btn btn-success center">
                 @if (Model.StudentID > 0)
@@ -44,20 +48,33 @@
 <script>
     $(document).ready(function () {
         $("#btnUpdateStudent").click(function () {
-            var editedData = $("#EditStudentForm").serialize();
-
+            debugger
+            //var editedData = $("#EditStudentForm").serialize();
+            var editedData = {
+                'StudentID': $("#studentid").val(),
+                'Name': $("#name").val().toString(),
+                'StudentNo': $("#stdnumber").val().toString(),
+                'Branch': $("#branch").val().toString(),
+                'Year': $("#year").val().toString(),
+                'ContactNumber': $("#contact").val().toString(),
+                'SportsInterested': $("#sports").val().toString(),
+                'Hosteler': $("#hosteler").val().toString(),
+                'Gender': $("#gender").val().toString()
+            };
+            debugger
             if (!$("#EditStudentForm").valid()) {
                 return false;
             }
+            var URL = '@Url.Action("SaveStudentDetails", "Admin")';
             $.ajax({
                 type: "POST",
-                url: "/Admin/SaveStudentDetails",
-                data: editedData,
+                url: URL,
+                data: { model: editedData },
                 success: function () {
-                    $("#EditEventModal").modal('close');
-                    window.location.href = "/Admin/Index";
+                    $("#EditStudentModal").modal('hide');
+                    window.location.reload();
                 }
-            })
-        })
+            });
+        });
     })
 </script>
